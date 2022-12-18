@@ -1,0 +1,414 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Content/Admin/js/jquery-2.1.1.js"></script>
+    <link href="~/Content/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Admin/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="~/Content/Admin/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="~/Content/Admin/css/animate.css" rel="stylesheet">
+    <link href="~/Content/Admin/css/style.css" rel="stylesheet">
+    <style>
+        .no-sort::after {
+            display: none !important;
+        }
+
+        .no-sort {
+            pointer-events: none !important;
+            cursor: default !important;
+        }
+
+        #table_length {
+            position: absolute;
+            margin-top: 42px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.4.1/css/colReorder.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.0.3/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/colreorder/1.4.1/js/dataTables.colReorder.min.js"></script>
+
+   
+    <style type="text/css">
+        input, select, textarea {
+            max-width: 100%;
+        }
+
+        .form-style-3 {
+            max-width: 100%;
+            font-family: "Droid Arabic Kufi", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        }
+
+            .form-style-3 label {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+                .form-style-3 label > span {
+                    float: right;
+                    width: 20px;
+                    color: #F072A9;
+                    font-weight: bold;
+                    font-size: 13px;
+                    text-shadow: 1px 1px 1px #fff;
+                }
+
+            .form-style-3 fieldset {
+                border-radius: 10px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                margin: 0px 0px 10px 0px;
+                border: 1px solid #004489;
+                padding: 20px;
+                background: #F4F4FF;
+                box-shadow: inset 0px 0px 15px #CADFF5;
+                -moz-box-shadow: inset 0px 0px 15px #CADFF5;
+                -webkit-box-shadow: inset 0px 0px 15px #CADFF5;
+            }
+
+                .form-style-3 fieldset legend {
+                    color: #004489;
+                    border-top: 1px solid #004489;
+                    border-left: 1px solid #004489;
+                    border-right: 1px solid #004489;
+                    border-radius: 5px 5px 0px 0px;
+                    -webkit-border-radius: 5px 5px 0px 0px;
+                    -moz-border-radius: 5px 5px 0px 0px;
+                    background: #F4F4FF;
+                    padding: 0px 8px 3px 8px;
+                    box-shadow: -0px -1px 2px #CADFF5;
+                    -moz-box-shadow: -0px -1px 2px #CADFF5;
+                    -webkit-box-shadow: -0px -1px 2px #CADFF5;
+                    font-weight: normal;
+                    font-size: 25px;
+                    text-align: right;
+                }
+
+            .form-style-3 textarea {
+                width: 250px;
+                height: 100px;
+            }
+
+            .form-style-3 input[type=text],
+            .form-style-3 input[type=date],
+            .form-style-3 input[type=datetime],
+            .form-style-3 input[type=number],
+            .form-style-3 input[type=search],
+            .form-style-3 input[type=time],
+            .form-style-3 input[type=url],
+            .form-style-3 input[type=email],
+            .form-style-3 select,
+            .form-style-3 textarea {
+                border-radius: 3px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border: 1px solid #004489;
+                outline: none;
+                color: #004489;
+                padding: 5px 8px 5px 8px;
+                box-shadow: inset 1px 1px 4px #CADFF5;
+                -moz-box-shadow: inset 1px 1px 4px #CADFF5;
+                -webkit-box-shadow: inset 1px 1px 4px #CADFF5;
+                background: #F4F4FF;
+            }
+
+        .floatForm {
+            float: left;
+            margin-top: 2px;
+        }
+
+        .form-style-3 input[type=submit],
+        .form-style-3 input[type=button] {
+            background: #46A2FF;
+            padding: 5px 15px 5px 15px;
+            color: #ffffff;
+            border-radius: 3px;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .required {
+            color: red;
+            font-weight: normal;
+        }
+
+        .label {
+            font-family: "Droid Arabic Kufi"
+        }
+
+        .nav > li > a {
+            font-family: "Droid Arabic Kufi";
+            font-size: 12px;
+        }
+    </style>
+    <style>
+        .form-horizontal .control-label {
+            text-align: right;
+            font-size: 18px;
+        }
+
+        .menu-area ul li a {
+            color: #545454;
+        }
+
+        .sticky ul li a {
+            color: white;
+        }
+
+
+
+        html {
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .table {
+            direction: rtl;
+        }
+
+            .table th {
+                text-align: right;
+            }
+    </style>
+    <style>
+        .table {
+            direction: ltr;
+        }
+
+
+            .table th {
+                text-align: left;
+            }
+
+        .Reslanglogin {
+            float: right;
+            padding: 14px;
+            padding-right: 0px;
+        }
+
+        .logot {
+            float: right;
+            padding: 14px;
+            padding-left: 4px;
+        }
+
+        .wrapper-content {
+            overflow-x: auto;
+        }
+
+        .btn-circle {
+            font-size: 15px;
+            padding: 3px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="wrapper">
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="nav-header">
+                            <div class="dropdown profile-element">
+                                <span>
+                                </span>
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <span class="clear">
+                                        <span class="block m-t-xs">
+                                            @Html.Partial("_ProfilePic")
+                                            <strong class="font-bold"><span>@User.Identity.Name</span></strong>
+                                        </span>
+                                    </span>
+                                </a>
+
+                            </div>
+
+                        </li>
+                        <li>
+                            <a href="~/Home/Index"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
+
+                        </li>
+                        @if (User.IsInRole("ManagerRole"))
+                        {
+                            <li>
+                                <a href="~/Employees/Index"><i class="fa fa-list"></i> <span class="nav-label">Employee List</span></a>
+
+                            </li>
+                            <li>
+                                <a href="~/EmployeeTasks/Index"><i class="fa fa-tasks"></i> <span class="nav-label">Tasks List</span></a>
+                            </li>
+                        }
+                        @if (User.IsInRole("EmployeeRole"))
+                        {
+                            <li>
+                                <a href="~/MyTasks/Index"><i class="fa fa-tasks"></i> <span class="nav-label">My Tasks</span></a>
+
+                            </li>
+                        }
+                        @if (User.IsInRole("AdminRole"))
+                        {
+                            <li>
+                                <a href="~/Departments/Index"><i class="fa fa-building"></i> <span class="nav-label">Departments</span></a>
+
+                            </li>
+                            <li>
+                                <a href="~/Employees/Index"><i class="fa fa-list"></i> <span class="nav-label">Employee List</span></a>
+
+                            </li>
+                        }
+
+                        <li>
+                            <a href="~/SmartPanTask.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i> <span class="nav-label">Help?</span></a>
+
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+
+
+
+            <div id="page-wrapper" class="white-bg dashbard-1">
+                <div class="row border-bottom">
+                    <nav class="navbar navbar-static-top banner" role="navigation" style="margin-bottom: 0">
+                        <div class="navbar-header">
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+
+                        </div>
+                        <section class="logot">
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-primary loginbtn">Logout</a>
+                            }
+                        </section>
+
+
+                    </nav>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="wrapper wrapper-content">
+                            @RenderBody()
+                        </div>
+
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="pull-right">
+                    </div>
+                    <div>
+                        <p>Copyright @DateTime.Now.Year SmartPan all right reserved.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <!-- Mainly scripts -->
+    <script src="~/Content/Admin/js/bootstrap.min.js"></script>
+    <script src="~/Content/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="~/Content/Admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Flot -->
+    <script src="~/Content/Admin/js/plugins/flot/jquery.flot.js"></script>
+    <script src="~/Content/Admin/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="~/Content/Admin/js/plugins/flot/jquery.flot.spline.js"></script>
+    <script src="~/Content/Admin/js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="~/Content/Admin/js/plugins/flot/jquery.flot.pie.js"></script>
+
+    <!-- Peity -->
+    <script src="~/Content/Admin/js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="~/Content/Admin/js/demo/peity-demo.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="~/Content/Admin/js/plugins/pace/pace.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="~/Content/Admin/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- GITTER -->
+    <script src="~/Content/Admin/js/plugins/gritter/jquery.gritter.min.js"></script>
+
+    <!-- Sparkline -->
+    <script src="~/Content/Admin/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Sparkline demo data  -->
+    <script src="~/Content/Admin/js/demo/sparkline-demo.js"></script>
+
+    <!--Toastr and confirmation-->
+    <link rel="stylesheet" href="~/Scripts/toastr/toastr.css" />
+    <script src="~/Scripts/toastr/toastr.min.js"></script>
+    <link rel="stylesheet" href="~/Scripts/toastr/jquery-confirm.css" />
+    <script src="~/Scripts/toastr/jquery-confirm.js"></script>
+    @RenderSection("scripts", required: false)
+
+    <script>
+        $(function () {
+
+            $(document).ready(function () {
+                $('#table33').DataTable({
+                    colReorder: true,
+                    "language": {
+                        "search": "search"
+                    },
+                    "lengthChange": true,
+                    dom: 'lBfrtip',
+                    buttons: [
+                        {
+                            extend: 'excelHtml5',
+                            title: 'SmaptPanFile',
+                            text: 'Excel'
+
+                        },
+                        {
+                            extend: 'print',
+                            title: ' SmaptPanPrint',
+                            text: 'Print Table'
+
+                        },
+
+                    ],
+                });
+
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
+

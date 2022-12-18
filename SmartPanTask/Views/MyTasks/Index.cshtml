@@ -1,0 +1,154 @@
+﻿@model IEnumerable<SmartPanTask.Models.EmployeeTask>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table"  id="table33">
+    <thead>
+        <tr>
+            <th>
+                S.
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAssigned)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateUpdated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateStarted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee.FirstName)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ 
+            var counter = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @counter
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAssigned)
+                </td>
+                <td>
+                    <p id="taskstatus_@item.Id">@item.TaskStatus</p>
+                </td>
+                <td  id="dateupdated_@item.Id">
+                    @Html.DisplayFor(modelItem => item.DateUpdated)
+                </td>
+                <td id="datestarted_@item.Id">
+                    @Html.DisplayFor(modelItem => item.DateStarted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                </td>
+                <td class="text-center">
+                    @if (item.DateStarted == null)
+                    {
+                        <button class="btn btn-primary" id="Starts_@item.Id" data-id="@item.Id" onclick="Starttask(this)">Start</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-default" id="Updates_@item.Id" data-id="@item.Id" onclick="Updatetask(this)">Update Task</button>
+                    }
+                </td>
+            </tr>
+            counter++;
+        }
+    </tbody>
+
+
+</table>
+
+@section Scripts {
+<script>
+    function Starttask(x) {
+        var taskid = $(x).data("id");
+        $.confirm({
+            title: 'Confirm Start Task',
+            content: 'Are you sure you want to Start this task now?',
+            buttons: {
+                confirm: function () {
+                    $.ajax({
+                        url: "@Url.Action("StartTask", "MyTasks")",
+                            type: "POST",
+                            data: { TaskId: taskid },
+                            traditional: true,
+                            success: function (dataa, errorMessage) {
+                                $("#taskstatus_" + taskid).html(dataa.status);
+                                $("#datestarted_" + taskid).html(dataa.startdate);
+                                $(x).replaceWith('<button class="btn btn-default" id="Updates_' + taskid + '" data-id="' + taskid + '" onclick="Updatetask(this)">Update Task</button>');
+                                toastr.success(dataa.message);
+                            }
+                        });
+                    },
+                    cancel: function () { },
+                }
+        });
+
+
+    }
+    function Updatetask(x) {
+        var trdata = $(x);
+        var taskid = $(x).data("id");
+        var oldstatus = $("#taskstatus_" + taskid).html();
+        $("#taskstatus_" + taskid).replaceWith('<select class="form-control" name="taskstatusupdate_' + taskid + '" id="taskstatusupdate_' + taskid + '"><option value="In Progress">In Progress</option><option value="Finished">Finished</option></select>');
+        $(x).replaceWith('<button class="btn btn-danger" id="Cancel_' + taskid + '" data-status="' + oldstatus + '"  data-id="' + taskid + '" onclick="CancelUpdatetask(this)"><i class="fa fa-close"></i></button><button class="btn btn-primary" id="Save_' + taskid + '" data-id="' + taskid + '" onclick="SaveUpdatetask(this)"><i class="fa fa-check"></i></button>')
+    }
+    function CancelUpdatetask(x) {
+        var taskid = $(x).data("id");
+        var taskstat = $(x).data("status");
+        $("#taskstatusupdate_" + taskid).replaceWith('<p id="taskstatus_' + taskid + '">' + taskstat + '</p>');
+        $("#Save_" + taskid).remove();
+        $(x).replaceWith('<button class="btn btn-default" id="Updates_' + taskid + '" data-id="' + taskid + '" onclick="Updatetask(this)">Update Task</button>');
+    }
+    function SaveUpdatetask(x) {
+        var taskid = $(x).data("id");
+        var taskstat = $("#taskstatusupdate_" + taskid).val();
+        $.ajax({
+            url: "@Url.Action("UpdateTask", "MyTasks")",
+            type: "POST",
+            data: { TaskId: taskid, TaskStats: taskstat },
+                traditional: true,
+                success: function (dataa, errorMessage) {
+                    $("#taskstatusupdate_" + taskid).replaceWith('<p id="taskstatus_' + taskid + '">' + dataa.status + '</p>');
+                    $("#dateupdated_" + taskid).html(dataa.updatedate);
+                    $("#Cancel_" + taskid).remove();
+                    $(x).replaceWith('<button class="btn btn-default" id="Updates_' + taskid + '" data-id="' + taskid + '" onclick="Updatetask(this)">Update Task</button>');
+                    toastr.info(dataa.message);
+                }
+        });
+
+    }
+</script>
+
+}
+

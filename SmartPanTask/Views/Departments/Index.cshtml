@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SmartPanTask.Models.Department>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="table33">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentName)
+            </th>
+            <th>
+                Number of Employees(including the managers)
+            </th>
+            <th>
+                Sum of Salaries
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>
+                <td>
+                    @item.Employees.Count
+
+                </td>
+                <td>
+                    @string.Format("{0:C}", item.Employees.Sum(a => a.Salary))
+
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+</table>
+
+@if(TempData["failed"] == "Unable to delete this department, where there are employees assigned to it!")
+{
+    <script>
+        alert("Unable to delete this department, where there are employees assigned to it!");
+    </script>
+}

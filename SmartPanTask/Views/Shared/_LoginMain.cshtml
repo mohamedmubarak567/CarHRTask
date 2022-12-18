@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+
+<!-- Meta -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="" />
+    <meta name="description" content="" />
+    <!-- Favicons Icon -->
+    <link rel="icon" href="images/favicon.html" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+    <!-- Page Title Here -->
+    <title>@ViewBag.Title</title>
+    <!-- Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/fontawesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/plugins/scroll/scrollbar.html">
+    <link class="skin" rel="stylesheet" type="text/css" href="~/Content/Login/css/skin/skin-1.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/templete.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/switcher.css" />
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Poppins:300,400,500,600,700|Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <style>
+        .form-control {
+            color: white !important;
+            width: 80%;
+            margin-left: 9%;
+        }
+        .text-danger{
+            font-weight:700;
+        }
+    </style>
+</head>
+
+<body id="bg">
+    <div class="page-wrapers">
+        <!-- Content -->
+        <div id="particles-js" class="page-content dez-login overlay-black-light bg-img-fix" style="background-image:url(../../Content/Login/images/background/froot-gardens/bg5.jpg);">
+            <div class="relative z-index3">
+
+                <div align="center">
+                    <img src="https://www.smartpan.com.sa/SiteStyle/FrontStyle/images/logo/Logo.png" alt="unido" width="560" />
+                </div>
+                <div align="center">
+                    <a href=" ~ />">
+                        <h2><span style="color:white;font-size:35px">SMART</span><span style="color:#6AAF08;font-weight:bolder;font-size:35px">PAN </span><span style="color:white">  "Employee and Manager Task" </span></h2>
+                    </a>
+                </div>
+                <div class="login-form style-3 text-white">
+                    <div class="tab-content">
+                        <div id="login" class="tab-pane active text-center">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-footer text-center text-white">
+                    <p>Powered by mohamedmubarak567@gmail.com </p>
+                </div>
+            </div>
+        </div>
+        <!-- Content END-->
+    </div>
+    <!-- JavaScript  files ========================================= -->
+    <script type="text/javascript" src="~/Content/Login/js/jquery.min.js"></script>
+    <!-- jquery.min js -->
+    <script type="text/javascript" src="~/Content/Login/js/bootstrap.min.js"></script>
+    <!-- bootstrap.min js -->
+    <script type="text/javascript" src="~/Content/Login/js/bootstrap-select.min.js"></script>
+    <!-- Form js -->
+    <script type="text/javascript" src="~/Content/Login/js/jquery.bootstrap-touchspin.js"></script>
+    <!-- Form js -->
+    <script type="text/javascript" src="~/Content/Login/js/magnific-popup.js"></script>
+    <!-- magnific-popup js -->
+    <script type="text/javascript" src="~/Content/Login/js/waypoints-min.js"></script>
+    <!-- waypoints js -->
+    <script type="text/javascript" src="~/Content/Login/js/counterup.min.js"></script>
+    <!-- counterup js -->
+    <script type="text/javascript" src="~/Content/Login/js/jquery.countdown.js"></script>
+    <!-- jquery countdown -->
+    <script type="text/javascript" src="~/Content/Login/js/imagesloaded.js"></script>
+    <!-- masonry  -->
+    <script type="text/javascript" src="~/Content/Login/js/masonry-3.1.4.js"></script>
+    <!-- masonry  -->
+    <script type="text/javascript" src="~/Content/Login/js/masonry.filter.js"></script>
+    <!-- masonry  -->
+    <script type="text/javascript" src="~/Content/Login/js/owl.carousel.js"></script>
+    <!-- OWL  Slider  -->
+    <script type="text/javascript" src="~/Content/Login/js/dz.carousel.js"></script>
+    <!-- sortcode fuctions  -->
+    <!-- switcher fuctions -->
+    <script type="text/javascript" src="~/Content/Login/js/switcher.min.js"></script>
+    <!-- particles  -->
+    <script src="~/Content/Login/js/particles.js"></script>
+    <link href="~/Scripts/toastr/toastr.css" rel="stylesheet" />
+    <script src="~/Scripts/toastr/toastr.min.js"></script>
+    <script>
+    particlesJS('particles-js',
+
+        {
+            "particles": {
+                "number": {
+                    "value": 0,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 1,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 5,
+                        "size_min": 0.3,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": false,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 600
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "bubble"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 250,
+                        "size": 0,
+                        "duration": 2,
+                        "opacity": 0,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 400,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 5
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        }
+
+    );
+    </script>
+    <script>
+    var slider = 1;
+    // set interval
+    var tid = setInterval(mycode, 3500);
+    function mycode() {
+        $('#particles-js').css('background-image', 'url(../../Content/Login/images/background/froot-gardens/bg' + slider + '.jpg)');
+        slider++;
+        if (slider == 5) slider = 1;
+
+    }
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+@if (TempData["failed"] == "You have been removed by the system, Conact with them or Register a new Acoount")
+{
+    <script>
+        toastr.warning("You have been removed by the system, Conact with them or Register a new Acoount");
+    </script>
+}
